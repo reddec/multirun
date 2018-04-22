@@ -6,12 +6,17 @@ const templayed = require('templayed');
 const lineReader = require('line-reader');
 const program = require('commander');
 
-
+let cmd, cmdArguments;
 program
     .version('1.0.0')
+    .arguments('<cmd> [arguments...]')
     .option('-c, --count [n]', 'Number of executables', parseInt, cpus().length * 2)
     .option('-t, --timeout [ms]', 'Graceful shutdown timeout', parseInt, 5000)
     .option('-f, --fail-fast', 'Shutdown every instances if at least one exited', false)
+    .action((c, a) => {
+        cmd = c;
+        cmdArguments = a;
+    })
     .parse(process.argv);
 
 function pad(num, size) {
@@ -69,10 +74,15 @@ function shutdown() {
     });
 }
 
+if (!cmd) {
+    console.error('no cmd specified. use --help for description.');
+    process.exit(1);
+}
+
 for (let i = 0; i < program.count; ++i) {
     console.log("spawn #", i + 1, "child process");
-    let args = program.args.slice(1).map((arg) => templayed(arg)({index: i}));
-    let task = spawn(program.args[0], args, {
+    let args = cmdArguments.map((arg) => templayed(arg)({index: i}));
+    let task = spawn(cmd, args, {
         shell: false, // prevent ignoring signals
         detached: false,
     });
