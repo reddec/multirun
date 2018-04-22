@@ -8,7 +8,7 @@ const program = require('commander');
 
 
 program
-    .version('0.0.1')
+    .version('1.0.0')
     .option('-c, --count [n]', 'Number of executables', parseInt, cpus().length * 2)
     .option('-t, --timeout [ms]', 'Graceful shutdown timeout', parseInt, 5000)
     .option('-f, --fail-fast', 'Shutdown every instances if at least one exited', false)
