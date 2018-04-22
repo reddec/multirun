@@ -1,5 +1,5 @@
 {
-  "name": "multirun",
+  "name": "runbatch",
   "version": "1.0.0",
   "description": "Run and control multiple executables",
   "main": "index.js",
@@ -8,19 +8,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/reddec/multirun.git"
+    "url": "git+ssh://git@github.com/reddec/runbatch.git"
   },
   "keywords": [
-    "multirun",
+    "runbatch",
     "runner",
     "testing"
   ],
   "author": "Baryshnikov Alexander <dev@baryshnikov.net>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/reddec/multirun/issues"
+    "url": "https://github.com/reddec/runbatch/issues"
   },
-  "homepage": "https://github.com/reddec/multirun#readme",
+  "homepage": "https://github.com/reddec/runbatch#readme",
   "dependencies": {
     "colors": "^1.2.1",
     "commander": "^2.15.1",
