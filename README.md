@@ -32,3 +32,9 @@ if you need stop every processes after first fail (non-zero code) you can use `-
 
     runbatch -f -- nc -l '{{index + 9000}}'
     # if at least one nc not bind then every one are closed
+
+## Example 4 (dynamic environment)
+
+you can set template environment variable by flag `-e, --env [key=value]`
+
+    runbatch -e "NODE_ID={{index}}" -- app

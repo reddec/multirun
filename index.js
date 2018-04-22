@@ -13,6 +13,7 @@ program
     .option('-c, --count [n]', 'Number of executables', parseInt, cpus().length * 2)
     .option('-t, --timeout [ms]', 'Graceful shutdown timeout', parseInt, 5000)
     .option('-f, --fail-fast', 'Shutdown every instances if at least one exited', false)
+    .option('-e, --env [key=value]', 'Setup additional environment. Also supports template', (arg) => arg.split('=', 2))
     .action((c, a) => {
         cmd = c;
         cmdArguments = a;
@@ -81,10 +82,16 @@ if (!cmd) {
 
 for (let i = 0; i < program.count; ++i) {
     console.log("spawn #", i + 1, "child process");
+    let env = JSON.parse(JSON.stringify(process.env));
+    if (program.env) {
+        let key = templayed(program.env[0])({index: i});
+        env[key] = templayed(program.env[1])({index: i});
+    }
     let args = cmdArguments.map((arg) => templayed(arg)({index: i}));
     let task = spawn(cmd, args, {
         shell: false, // prevent ignoring signals
         detached: false,
+        env: env,
     });
     task.once('error', (e) => taskFail(task, i, e));
     task.once('exit', (code, signal) => taskExited(task, i, code, signal));
