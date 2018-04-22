@@ -1,0 +1,30 @@
+{
+  "name": "multirun",
+  "version": "1.0.0",
+  "description": "Run and control multiple executables",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/reddec/multirun.git"
+  },
+  "keywords": [
+    "multirun",
+    "runner",
+    "testing"
+  ],
+  "author": "Baryshnikov Alexander <dev@baryshnikov.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/reddec/multirun/issues"
+  },
+  "homepage": "https://github.com/reddec/multirun#readme",
+  "dependencies": {
+    "colors": "^1.2.1",
+    "commander": "^2.15.1",
+    "line-reader": "^0.4.0",
+    "templayed": "^0.2.3"
+  }
+}
