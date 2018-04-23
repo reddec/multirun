@@ -3,7 +3,7 @@ const {cpus} = require('os');
 const {spawn} = require('child_process');
 const colors = require('colors');
 const templayed = require('templayed');
-const lineReader = require('line-reader');
+const readline = require('readline');
 const program = require('commander');
 
 let cmd, cmdArguments;
@@ -95,8 +95,16 @@ for (let i = 0; i < program.count; ++i) {
     });
     task.once('error', (e) => taskFail(task, i, e));
     task.once('exit', (code, signal) => taskExited(task, i, code, signal));
-    lineReader.eachLine(task.stdout, (line) => taskOutLine(task, i, line));
-    lineReader.eachLine(task.stderr, (line) => taskErrLine(task, i, line));
+    const stdout = readline.createInterface({
+        input: task.stdout,
+        crlfDelay: Infinity
+    });
+    const stderr = readline.createInterface({
+        input: task.stderr,
+        crlfDelay: Infinity
+    });
+    stdout.on('line', (line) => taskOutLine(task, i, line));
+    stderr.on('line', (line) => taskErrLine(task, i, line));
     tasks.push(task);
 }
 

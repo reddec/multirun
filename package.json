@@ -1,6 +1,6 @@
 {
   "name": "runbatch",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Run and control multiple executables",
   "main": "index.js",
   "scripts": {
@@ -27,7 +27,6 @@
   "dependencies": {
     "colors": "^1.2.1",
     "commander": "^2.15.1",
-    "line-reader": "^0.4.0",
     "templayed": "^0.2.3"
   }
 }
